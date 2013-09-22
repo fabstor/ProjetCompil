@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# -----------------------------------------------------------------------------
+# Ce script permet l'évaluation de la couverture du paquetage 
+# ProjetCompil.Verif.Src par un jeu de tests.
+#
+# Script à mettre dans le répertoire ProjetCompil/Cobertura
+#
+# Usage : 
+#   ./testCouverture chemin_parent_ProjetCompil fichiers_tests 
+#
+# Le chemin_parent_ProjetCompil est la plupart du temps $HOME 
+#
+# Exemple d'utilisation : 
+#   ./testCouvertureVerif $HOME $HOME/ProjetCompil/Verif/Test/arith*.cas
+#
+# Les résultats de couverture sont dans 
+#    ProjetCompil/Cobertura/CouvertureVerif/index.html
+# -----------------------------------------------------------------------------
+
+/bin/rm -f couverture.ser
+
+PROJET=$1
+
+cobertura-1.9.3/cobertura-instrument.sh --destination Instru --datafile couverture.ser $PROJET/ProjetCompil/Verif/Src 
+
+shift
+
+for fich in $* 
+do
+
+    java -cp cobertura-1.9.3/cobertura.jar:Instru:$CLASSPATH -Dnet.sourceforge.cobertura.datafile=couverture.ser ProjetCompil.Verif.Src.TestVerif $fich
+done
+
+cobertura-1.9.3/cobertura-report.sh --format html --datafile couverture.ser --destination CouvertureVerif $PROJET
+
+
