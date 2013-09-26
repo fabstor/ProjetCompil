@@ -255,48 +255,55 @@ COMMENTAIRE    = "--"(.)*"\n"
 \n                     { }
 
 COMMENTAIRE {}
-        
-AND { return symbol(sym.AND); }
-
-ARRAY { return symbol(sym.ARRAY); }
-
-BEGIN { return symbol(sym.BEGIN); }
-
-DIV { return symbol(sym.DIV); }
-
-DO { return symbol(sym.DO); }
-
-FOR { return symbol(sym.FOR); }
-
-IF    { return symbol(sym.IF); }
-
-MOD { return symbol(sym.MOD); }
-
-NEW_LINE { return symbol(sym.NEW_LINE); }
-
-NOT { return symbol(sym.NOT); }
-
-NULL { return symbol(sym.NULL); }
-
-OF { return symbol(sym.OF); }
-
-OR { return symbol(sym.OR); }
-
-PROGRAM { return symbol(sym.PROGRAM); }
-
-READ { return symbol(sym.READ); }
-
-THEN { return symbol(sym.THEN); }
-
-TO { return symbol(sym.TO); }
-
-WHILE { return symbol(sym.WHILE); }
-
-WRITE { return symbol(sym.WRITE); }
 
 {CHAINE} 	{ return symbol(sym.CONST_CHAINE, new String((yytext().substring(1,yytext().toString().length()-1))) );}
 
 {IDF} 	    { return symbol(sym.IDF, yytext()); }
+        
+("a"|"A")("n"|"N")("d"|"D") { return symbol(sym.AND); }
+
+("a"|"A")("r"|"R")("r"|"R")("a"|"A")("y"|"Y") { return symbol(sym.ARRAY); }
+
+("b"|"B")("e"|"E")("g"|"G")("i"|"I")("n"|"N") { return symbol(sym.BEGIN); }
+
+("d"|"D")("i"|"I")("v"|"V") { return symbol(sym.DIV); }
+
+("d"|"D")("o"|"O") { return symbol(sym.DO); }
+
+("d"|"D")("o"|"O")("w"|"W")("n"|"N")("t"|"T")("o"|"O") { return symbol(sym.DOWNTO); }
+
+("e"|"E")("n"|"N")("d"|"D") { return symbol(sym.END); }
+
+("e"|"E")("l"|"L")("s"|"S")("e"|"E") { return symbol(sym.ELSE); }
+
+("f"|"F")("o"|"O")("r"|"R") { return symbol(sym.FOR); }
+
+("i"|"I")("f"|"F")    { return symbol(sym.IF); }
+
+("m"|"M")("o"|"O")("d"|"D") { return symbol(sym.MOD); }
+
+("n"|"N")("e"|"E")("w"|"W")"_"("l"|"L")("i"|"I")("n"|"N")("e"|"E") { return symbol(sym.NEW_LINE); }
+
+("n"|"N")("o"|"O")("t"|"T") { return symbol(sym.NOT); }
+
+("n"|"N")("u"|"U")("l"|"L")("l"|"L") { return symbol(sym.NULL); }
+
+("o"|"O")("f"|"F") { return symbol(sym.OF); }
+
+("o"|"O")("r"|"R") { return symbol(sym.OR); }
+
+("p"|"P")("r"|"R")("o"|"O")("g"|"G")("r"|"R")("a"|"A")("m"|"M") { return symbol(sym.PROGRAM); }
+
+("r"|"R")("e"|"E")("a"|"A")("d"|"D") { return symbol(sym.READ); }
+
+("t"|"T")("h"|"H")("e"|"E")("n"|"N") { return symbol(sym.THEN); }
+
+("t"|"T")("o"|"O") { return symbol(sym.TO); }
+
+("w"|"W")("h"|"H")("i"|"I")("l"|"L")("e"|"E") { return symbol(sym.WHILE); }
+
+("w"|"W")("r"|"R")("i"|"I")("t"|"T")("e"|"E") { return symbol(sym.WRITE); }
+
 
 {INT}     { try { 
                  return symbol(sym.CONST_ENT, 
@@ -352,7 +359,7 @@ WRITE { return symbol(sym.WRITE); }
 
 ")" 			{ return symbol(sym.PAR_FERM); }
 
-";" 			{ return symbol(sym.POPINT_VIRGULE); }              
+";" 			{ return symbol(sym.POINT_VIRGULE); }              
 
 "/=" 			{ return symbol(sym.DIFF); }
 

@@ -1,0 +1,21 @@
+program
+"progforhello"
+a : integer ;
+b, c : boolean ;
+begin
+a := 1 ;
+b := a + 1 ;
+end
+;
+program
+t :
+array
+[1..10] of
+array
+[1..5] of
+integer
+;
+begin
+t[10][5] := 0 ; --helo
+end
+; 
